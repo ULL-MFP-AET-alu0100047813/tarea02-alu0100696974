@@ -1,0 +1,74 @@
+---
+layout: default
+---
+
+<!-- Mathjax Support  -->
+<!-- MathJax version 3 -->
+<script type="text/javascript">
+window.MathJax = {
+tex: {
+    packages: ['base', 'ams']
+},
+loader: {
+    load: ['ui/menu', '[tex]/ams']
+}
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<h1><a href="{{ site.baseurl }}/ExploreTree.html" class="Explore-tree">Arbol de exploración</a></h1>
+
+<div class="temas">
+  {% for tema in site.temas %}
+    {%- if tema.visible %}
+    <article class="post">
+
+      <h1><a href="{{ site.baseurl }}/{{ tema.url }}">{{ tema.title }}</a></h1>
+      
+      <div class="entry">
+        {{ tema.excerpt | slice: 0, 20 | append: '...' }}
+      </div>
+
+      <a href="{{ site.baseurl }}/{{ tema.url }}" class="read-more">Read More</a>
+    </article>
+    {%- endif %}
+  {% endfor %}
+</div>
+
+<div class="tareas">
+  {% for tarea in site.tareas %}
+    {%- if tarea.visible %}
+    <article class="post">
+
+      <h1><a href="{{ site.baseurl }}/{{ tarea.url }}">{{ tarea.title }} ({{ tarea.date | slice: 0, 10 }})</a></h1>
+      
+      <div class="entry">
+        {{ tarea.name | markdownify | slice: 0, 20 | append: '...' }}
+      </div>
+
+      <a href="{{ site.baseurl }}/{{ tarea.url }}" class="read-more">Read More</a>
+    </article>
+    {%- endif %}
+  {% endfor %}
+</div>
+  <a href="{{ site.baseurl }}/no_existe.html">Enlace a Nowhere</a>
+</div>
+
+<div style="border-style: solid; border-radius: 25px;">
+<ol>
+{%- for col in site.collections %}
+<li> Colección: {{ col.label }} </li>
+  <ol>
+  {%-  assign firstdocs = col.docs | slice: 0,3 %}
+  {%- for elem in firstdocs %}
+    <li> <b>path:</b> {{ elem.path }} <b>url:</b> {{ elem.url }} </li>
+  {%- endfor %}
+  </ol>
+{%- endfor %}
+</ol>
+</div>
+
+$$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \,d\xi$$
